@@ -17,10 +17,12 @@ WORKDIR /
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-* &&\
     sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-*
 
-#RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
-#RUN curl -o /usr/bin/kubectl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl 
+COPY ./root/ /
+
+RUN chmod 0755 /run-*.sh /services/*
 
 RUN yum install -y java-11-openjdk-devel git yum-utils 
+
 # RUN yum install -y git  yum-utils
 # RUN wget https://download.docker.com/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo
 # RUN yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo 
@@ -39,9 +41,6 @@ RUN yum install -y unzip && curl -o /tmp/buildAgent.zip -k https://teamcity.ksof
     #wget http://archive.apache.org/dist/logging/log4j/1.2.17/log4j-1.2.17.jar -O /opt/buildagent/lib/log4j-1.2.17.jar && \
     #wget http://archive.apache.org/dist/logging/log4j/1.2.17/log4j-1.2.17-json-layout.jar -O /opt/buildagent/lib/log4j-1.2.17-json-layout.jar && \
     rm -f -r /tmp/*
-COPY root/ /
-
-RUN chmod 0755 /run-*.sh /services/*
 
 # USER 1000
 

@@ -1,5 +1,6 @@
 Write-Host "Preaparing files"
-if (-not (Test-Path -Path ".\root\bin\kubectl") ) {
+$binDir = "./root/usr/local/bin"
+if (-not (Test-Path -Path "$binDir/kubectl") ) {
 
 
     $kubeVer = Invoke-WebRequest https://storage.googleapis.com/kubernetes-release/release/stable.txt | Select-Object $_.Content
@@ -7,9 +8,9 @@ if (-not (Test-Path -Path ".\root\bin\kubectl") ) {
     $kubeUrl = "https://storage.googleapis.com/kubernetes-release/release/$kubeVer/bin/linux/amd64/kubectl"
     Write-Host "Kubectl Url:", $kubeUrl
 
-    New-Item -ItemType Directory -Path "./root/bin/" -Force
+    New-Item -ItemType Directory -Path $binDir -Force
 
-    Invoke-WebRequest -Uri $kubeUrl -OutFile "./root/bin/kubectl"
+    Invoke-WebRequest -Uri $kubeUrl -OutFile "$binDir/kubectl"
     Write-Host "Kubectl downloaded"
 }
 else {
