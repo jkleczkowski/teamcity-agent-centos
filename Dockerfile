@@ -27,7 +27,7 @@ RUN yum install -y java-11-openjdk-devel git yum-utils
 # RUN wget https://download.docker.com/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo
 # RUN yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo 
 RUN yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo  && yum install -y docker-ce
-RUN yum install -y python3 gcc python3-devel  krb5-workstation krb5-libs krb5-devel 
+RUN yum install -y python39 gcc python39-devel  krb5-workstation krb5-libs krb5-devel 
 
 # installing build agent
 
@@ -58,6 +58,8 @@ RUN ansible-galaxy collection install \
 ENV POWERSHELL_VERSION=7.1.0
 
 RUN curl https://packages.microsoft.com/config/rhel/7/prod.repo | tee /etc/yum.repos.d/microsoft.repo && yum install -y powershell
+
+RUN yum install dotnet-sdk-6.0 -y
 
 
 # USER root
