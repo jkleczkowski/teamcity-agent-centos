@@ -19,7 +19,7 @@ else {
 
 Write-Host "Building image"
 
-docker build -t jkleczkowski/teamcity-agent:cenetos . --pull
+docker build -t jkleczkowski/teamcity-agent:centos8 . --pull
 
 
 # docker run --rm --name tca -v c:/DockerBuildAgent/conf:/data/teamcity_agent/conf -v c:/DockerBuildAgent/work:/opt/buildagent/work -e SERVER_URL=https://teamcity.ksoft.biz/ jkleczkowski/teamcity-agent:centos8
