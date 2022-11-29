@@ -55,11 +55,11 @@ RUN ansible-galaxy collection install \
     community.general \
     community.libvirt
 
-ENV POWERSHELL_VERSION=7.1.0
+ENV POWERSHELL_VERSION=7.3.0
+RUN curl https://packages.microsoft.com/config/rhel/7/prod.repo | tee /etc/yum.repos.d/microsoft.repo && yum install -y dotnet-sdk-6.0 powershell && yum clean packages
 
-RUN curl https://packages.microsoft.com/config/rhel/7/prod.repo | tee /etc/yum.repos.d/microsoft.repo && yum install -y powershell
 
-RUN yum install dotnet-sdk-6.0 -y
-
+#RUN yum install -y dotnet-sdk-6.0 && yum clean packages
+#RUN yum install -y powershell && yum clean packages
 
 # USER root
